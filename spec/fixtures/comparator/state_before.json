@@ -1,0 +1,11 @@
+[
+["9090990990890809809809808909808098098080","./hii/untouched"],
+["9090990990890809809809808909808098098080","./hii/untouched/copy"],
+["107023422aaccff2434234324aad76adasdda131","./foo/file_moved_old_location"],
+["77855558e64d2f0789123cacaaaf_old_content","./bar/file_changed_content"],
+["213141432dsadf33525asdasd44afafa3433ccc6","./baz/hereby_deleted"],
+["1337156616516565161656546546161651651656","./why/untouched"],
+["1337156616516565161656546546161651651656","./why/hereby_deleted/copy"],
+["8746464659448774516949464649465164623444","./kyle/a/file_moved_old_location"],
+["8746464659448774516949464649465164623444","./kyle/b/file_moved_old_location/copy"]
+]
