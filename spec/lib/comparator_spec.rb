@@ -2,10 +2,17 @@ require "spec_helper"
 
 describe Treedisha::Comparator do
   before(:each) do
-    new_tree = FixturesHelper.read_json_file("comparator/state_after.json")
-    old_tree = FixturesHelper.read_json_file("comparator/state_before.json")
+    new_tree = FixturesHelper.read_json_file("comparator_a/state_after.json")
+    old_tree = FixturesHelper.read_json_file("comparator_a/state_before.json")
     
     @comparator = Treedisha::Comparator.new(new_tree, old_tree)
+  end
+  
+  it "should throw no error" do
+    new_tree = FixturesHelper.read_json_file("comparator_b/state_after.json")
+    old_tree = FixturesHelper.read_json_file("comparator_b/state_before.json")
+    
+    comparator = Treedisha::Comparator.new(new_tree, old_tree)
   end
   
   it "should be possible find unmodified files" do

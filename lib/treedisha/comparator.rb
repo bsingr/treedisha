@@ -76,7 +76,7 @@ module Treedisha
       moved = {}
       new_list.each do |new_checksum, new_path|
         if moved[new_checksum]
-          moved[new_checksum][:new] << new_path
+          moved[new_checksum][:new_paths] << new_path
         else
           found_pairs_by_checksum = old_list.find_all{|old_checksum, old_path| new_checksum == old_checksum}
           moved[new_checksum] = {
