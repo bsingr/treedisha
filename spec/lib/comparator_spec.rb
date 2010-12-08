@@ -32,6 +32,7 @@ describe Treedisha::Comparator do
   it "should be possible find modified files and their new content" do
     @comparator.modified_new_content.size.should == 1
     @comparator.modified_new_content.each do |hash, path|
+      path.should =~ /file_changed_content/
       hash.should =~ /new_content/
     end
   end
@@ -39,6 +40,7 @@ describe Treedisha::Comparator do
   it "should be possible find modified files and their old content" do
     @comparator.modified_old_content.size.should == 1
     @comparator.modified_old_content.each do |hash, path|
+      path.should =~ /file_changed_content/
       hash.should =~ /old_content/
     end
   end
@@ -55,5 +57,34 @@ describe Treedisha::Comparator do
     @comparator.deleted.each do |hash,path|
       path.should =~ /hereby_deleted/
     end
+  end
+  
+  it "should be possible to track modified files" do
+    @comparator.modified.keys.size.should == 1
+    @comparator.modified.each do |path, checksums|
+      path.should =~ /file_changed_content/
+      checksums[:old_checksum].should =~ /old_content/
+      checksums[:new_checksum].should =~ /new_content/
+    end
+  end
+  
+  it "should be possible to track moved files" do
+    old_paths_count = 0
+    new_paths_count = 0
+    @comparator.moved.keys.size.should == 2
+    @comparator.moved.each do |checksum, paths|
+      paths[:old_paths].empty?.should be_false
+      old_paths_count += paths[:old_paths].size
+      paths[:old_paths].each do |path|
+        path.should =~ /file_moved_old_location/
+      end
+      paths[:new_paths].empty?.should be_false
+      new_paths_count += paths[:new_paths].size
+      paths[:new_paths].each do |path|
+        path.should =~ /file_moved_new_location/
+      end
+    end
+    old_paths_count.should == 3
+    new_paths_count.should == 2
   end
 end
